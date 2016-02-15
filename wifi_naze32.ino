@@ -104,9 +104,12 @@ void setup() {
 	delay(1000);
 	Serial.begin(115200);
 	/* You can remove the password parameter if you want the AP to be open. */
+  IPAddress apIP(192, 168, 1, 1);
+  IPAddress netMsk(255, 255, 255, 0);
+  WiFi.softAPConfig(apIP, apIP, netMsk);
+  
 	WiFi.softAP(ssid, password);
 
-	IPAddress myIP = WiFi.softAPIP();
 	server.on("/", handleRoot);
   server.on("/config", handleConfig);
   
